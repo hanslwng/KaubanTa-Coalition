@@ -1,0 +1,12 @@
+{
+  "name": "kaubanta",
+  "private": true,
+  "description": "KaubanTa Coalition website. Static front end on Vercel, data in Supabase.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
