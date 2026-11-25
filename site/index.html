@@ -18,6 +18,8 @@ a{color:var(--link)}
 h1,h2,h3{line-height:1.1;margin:0 0 .6rem;font-weight:800;letter-spacing:-.02em}
 h2{font-size:clamp(1.6rem,4vw,2.4rem)}h3{font-size:1.2rem}
 p{margin:0 0 1rem;max-width:68ch}
+ul{margin:0 0 1rem;padding-left:1.2rem;max-width:68ch}
+li{margin:0 0 .35rem}
 header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--hd);border-bottom:1px solid var(--bd);z-index:9}
 .bar{max-width:1080px;margin:auto;padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .brand{font-weight:800;font-size:1.3rem;text-decoration:none;color:var(--tx);margin-right:auto}
@@ -84,9 +86,9 @@ footer input{color:#1b2340;background:#fff}
 <main id="app"><section class="w"><p>Loading…</p></section></main>
 <footer><div class="w">
 <div><h3>KaubanTa Coalition</h3><p>Also known as Together Coalition. Youth-led service across the Philippines.</p></div>
-<div><h3>Quick links</h3><p><a href="#about">About</a><br><a href="#signup">Sign Up</a><br><a href="#volunteer">This week’s activities</a><br><a href="#contact">Contact Us</a></p></div>
+<div><h3>Quick links</h3><p><a href="#about">About</a><br><a href="#signup">Sign Up</a><br><a href="#volunteer">This week’s activities</a><br><a href="#contact">Contact Us</a><br><a href="#privacy">Privacy notice</a></p></div>
 <div><h3>Get the newsletter</h3><form data-form="subscribe" data-ok="Salamat! You’re on the list."><label>Email<input name="e" type="email" required autocomplete="email" maxlength="160"></label><input class="hp" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn y" type="submit">Subscribe</button></form></div>
-</div><div class="w" style="padding-top:0;display:block"><small>Sample content for design review. Facebook, Instagram, TikTok, X.</small></div></footer>
+</div></footer>
 <script>
 const $=s=>document.querySelector(s),app=$("#app");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
@@ -127,7 +129,8 @@ ${inp("Full name","n","text",1,'autocomplete="name" maxlength="120"')}${inp("Ema
 <fieldset><legend>Interests</legend>${["Education","Environment","Health","Disaster response","Advocacy","Relief"].map(x=>`<label><input type="checkbox" name="i" value="${x}">${x}</label>`).join("")}</fieldset>
 <fieldset><legend>Availability</legend><label><input type="checkbox" name="av" value="Weekdays">Weekdays</label><label><input type="checkbox" name="av" value="Weekends">Weekends</label></fieldset>
 <label>How did you hear about us?<select name="h"><option>Friend or classmate</option><option>Social media</option><option>School event</option><option>Other</option></select></label>
-<label style="display:flex;gap:.5rem;font-weight:400"><input type="checkbox" required style="width:auto;margin-top:.3rem">I agree that KaubanTa may process my information under the Data Privacy Act of 2012.</label>
+<label style="display:flex;gap:.5rem;font-weight:400"><input type="checkbox" required style="width:auto;margin-top:.3rem">I have read the privacy notice and I agree that KaubanTa may process my information under the Data Privacy Act of 2012.</label>
+<p><a href="#privacy">Read the Data Privacy Act notice</a></p>
 ${hp}<button class="btn" type="submit">Sign me up</button></form></section>`}
 function nl(k){const D=k=="w"?W:M;return `<section class="w"><h2>${k=="w"?"Weekly newsletters":"Monthly newsletters"}</h2><p>${k=="w"?"A short recap of each week and what’s next.":"Monthly highlights, volunteer spotlights, and a look at the month ahead."}</p>${sub}<div class="g3" style="margin-top:2rem">${D.map((x,i)=>nlCard(k,x,i)).join("")}</div></section>`}
 function issue(k,i){const x=(k=="w"?W:M)[i];if(!x)return nl(k);return `<section class="w"><p><a href="#${k=="w"?"weekly":"monthly"}">Back to ${k=="w"?"weekly":"monthly"} newsletters</a></p>${cover(i,x.cover)}<h2>${esc(x.t)}</h2><p class="meta" style="color:var(--mu)">${esc(x.d)}</p>${x.f?`<p><b>${esc(x.f)}</b></p>`:""}${x.b.map(p=>`<p>${esc(p)}</p>`).join("")}<a class="btn" href="#volunteer">See this week’s activities</a>${k=="m"?`<button class="btn g" type="button" onclick="print()">Save as PDF</button>`:""}</section>`}
@@ -140,13 +143,26 @@ function contact(){return `<section class="w"><h2>Contact us</h2><p>Questions, p
 <label>Subject<select name="s"><option>General inquiry</option><option>Partnership</option><option>Volunteer</option><option>Media</option><option>Other</option></select></label>
 <label>Message<textarea name="msg" rows="5" required maxlength="4000"></textarea></label>${hp}<button class="btn" type="submit">Send message</button></form>
 <div><div class="card"><h3>Reach us</h3><p>hello@kaubanta.example<br>+63 900 000 0000<br>Sample address, Laguna, Philippines<br>Office hours: Mon to Fri, 9 AM to 5 PM</p></div>
-<div class="card" style="margin-top:1rem;height:150px;display:grid;place-items:center;color:var(--mu)">Map goes here</div></div></div></section>
+</div></div></section>
 <section class="alt"><div class="w"><h2>Frequently asked questions</h2>
 <details><summary>Do I need experience to volunteer?</summary><p>No. We train you on the day.</p></details>
 <details><summary>Is there a membership fee?</summary><p>No. Joining and volunteering are free.</p></details>
 <details><summary>Can my school or group join together?</summary><p>Yes. Send us a message under Partnership.</p></details></div></section>`}
-const P={home,about,signup,weekly:()=>nl("w"),monthly:()=>nl("m"),volunteer,contact};
-const T={home:"Home",about:"About",signup:"Sign Up",weekly:"Weekly Newsletters",monthly:"Monthly Newsletters",volunteer:"Volunteer",contact:"Contact Us"};
+function privacy(){return `<section class="w"><h2>Privacy notice</h2><p>This notice explains how KaubanTa Coalition, also called Together Coalition, handles personal information under the Data Privacy Act of 2012 (Republic Act No. 10173). It was last updated on 25 November 2026.</p>
+<h3>Who we are</h3><p>KaubanTa Coalition is the personal information controller for the details you send through this website. We are a youth-led volunteer group in the Philippines. For a privacy request, use the <a href="#contact">Contact page</a> and choose Other.</p>
+<h3>What we collect</h3><p>The details depend on which form you use.</p>
+<ul><li><b>Sign up:</b> full name, email, mobile number, birthday, school or workplace, city and province, interests, availability, and how you heard about us.</li><li><b>Activity RSVP:</b> name, email, contact number, and the activity you are joining.</li><li><b>Newsletter:</b> email address.</li><li><b>Contact:</b> name, email, subject, and your message.</li></ul>
+<h3>Why we collect it</h3><p>We use this information to add you as a volunteer, reserve your slot, tell you about the activity you joined, send the newsletter if you subscribed, and reply to your message. We also use it to keep a record of members and attendance. We do not sell personal information, and we do not use it for advertising.</p>
+<h3>Our basis</h3><p>We process sign-up and RSVP details with your consent, which you give by reading this notice and ticking the agreement on the sign-up form. Newsletter and contact details are used to do what you asked: send the newsletter, or answer your message.</p>
+<h3>Where it is stored</h3><p>Form entries are stored in our Supabase database. The website itself is hosted on Vercel. Officers who manage the coalition can open those records. Visitors on this website cannot see another person’s entry.</p>
+<h3>How long we keep it</h3><p>We keep your information while you are a volunteer and while we need it to run the activity you joined. If you ask us to delete it, we will remove it unless we still need a copy for a legal duty.</p>
+<h3>Your rights</h3><p>Under the Data Privacy Act, you may ask to be informed, to access your information, to correct it, to object or withdraw consent, to have it erased or blocked, and to receive a copy in a portable form. You may also complain to the National Privacy Commission.</p>
+<p>Send these requests through the <a href="#contact">Contact page</a>. Choose Other, and say that it is a privacy request. Include the email address you used on the form.</p>
+<h3>If you are under 18</h3><p>Join only with the knowledge and consent of a parent or guardian. A parent or guardian may also write to us to review or delete a minor’s information.</p>
+<h3>Security</h3><p>Access to the saved forms is limited to the coalition’s database account. Please use a current browser, and do not send passwords or government ID numbers through the contact form.</p>
+<p><a href="#signup">Back to sign up</a></p></section>`}
+const P={home,about,signup,weekly:()=>nl("w"),monthly:()=>nl("m"),volunteer,contact,privacy};
+const T={home:"Home",about:"About",signup:"Sign Up",weekly:"Weekly Newsletters",monthly:"Monthly Newsletters",volunteer:"Volunteer",contact:"Contact Us",privacy:"Privacy notice"};
 function acts(c){const list=$("#list");if(list)list.innerHTML=A.filter(a=>c=="All"||a.c==c).map(actCard).join("")}
 function go(){let h=location.hash.slice(1)||"home",m=h.match(/^issue-([wm])(\d+)$/);
 app.innerHTML=m?issue(m[1],+m[2]):(P[h]||home)();
